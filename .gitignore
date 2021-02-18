@@ -31,3 +31,13 @@ vagrant/.bashrc
 vagrant/sbt-launch.jar
 
 tmp
+
+# Metals
+.bsp
+.metals
+.bloop
+metals.sbt
+
+# VSCode
+.vscode
+
