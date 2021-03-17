@@ -17,14 +17,14 @@ class FirstStepsSuite extends munit.FunSuite {
   }
   
   test("doubleArray should return an array of doubled numbers") {
-    assertEquals(doubleArray(Array(1, 2, 3)), (Array(2, 4, 6)))
-    assertEquals(doubleArray(Array(9, 7, 5, 12)), (Array(18, 14, 10, 24)))
+    assertEquals(doubleArray(Array(1, 2, 3)).toList, (Array(2, 4, 6)).toList)
+    assertEquals(doubleArray(Array(9, 7, 5, 12)).toList, (Array(18, 14, 10, 24)).toList)
   }
 
 
   test("timesPosition should mutliply the elements of an array by their position") {
-    assertEquals(timesPosition(Array(1, 2, 3)), (Array(1 * 0, 2 * 1, 3 * 2)))
-    assertEquals(timesPosition(Array(9, 7, 5, 12)), (Array(9 * 0, 7 * 1, 5 * 2, 12 * 3)))
+    assertEquals(timesPosition(Array(1, 2, 3)).toList, (Array(1 * 0, 2 * 1, 3 * 2)).toList)
+    assertEquals(timesPosition(Array(9, 7, 5, 12)).toList, (Array(9 * 0, 7 * 1, 5 * 2, 12 * 3)).toList)
   }
 
 
