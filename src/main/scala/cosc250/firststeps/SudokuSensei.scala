@@ -77,14 +77,16 @@ object SudokuSensei {
     * Don't forget, Position is just an alias for a tuple (Int, Int)
     */
   def row(pos:Position):Seq[Position] = {
-    ???
+    val (_, y) = pos
+    for x <- 0 until 9 yield x -> y
   }
 
   /**
     * Now let's make a function that will return all the Positions in the same column
     */
   def column(pos:Position):Seq[Position] = {
-    ???
+    val (x, _) = pos
+    for y <- 0 until 9 yield x -> y
   }
 
   /**
@@ -95,14 +97,23 @@ object SudokuSensei {
     * So let's define that as a function. (No higher order functions required here)
     */
   def whichThree(n:Int):Seq[Int] = {
-    ???
+    if n < 3 then 
+      Seq(0, 1, 2)
+    else if n < 6 then
+      Seq(3, 4, 5)
+    else
+      Seq(6, 7, 8)
   }
 
   /**
     * And then let's use that function to return all the positions in the same quadrant.
     */
   def quadrant(pos:Position):Seq[Position] = {
-    ???
+    val (x, y) = pos
+    for
+      xx <- whichThree(x)
+      yy <- whichThree(y)
+    yield (xx, yy)
   }
 
   /**
@@ -127,7 +138,7 @@ object SudokuSensei {
     * And you might want to use the exists method -- a higher order function on sequences.
     */
   def numberPresentIn(grid:Grid, n:Int, positions:Seq[Position]):Boolean = {
-    ???
+    positions.exists(pos => grid.get(pos).contains(n))
   }
 
   /**
@@ -143,7 +154,15 @@ object SudokuSensei {
     * positionFunctions.exists(...
     */
   def possibilitiesFor(pos:Position, grid:Grid):Seq[Int] = {
-    ???
+    // This one's a bit of a mouthful...
+    // From the numbers 1 to 9, we want to filter out (filterNot) those where...
+    //   In the position functions, there exists a position function (producing a list of positions)
+    //     Where in the positions it produces, there is a position where the grid contains that number
+    (1 to 9).filterNot(n => 
+      positionFunctions.exists(f => 
+        f(pos).exists(pos => grid.get(pos).contains(n))
+      )
+    )
   }
 
   /**
@@ -152,7 +171,15 @@ object SudokuSensei {
     * what number goes there.
     */
   def nextMoves(grid:Grid):Seq[(Position, Int)] = {
-    ???
+
+    // I've cheekily introduced a new bit of syntax in this solution.
+    // In a for comprehension, if we use = rather than <-, it'll let us define a value (rather than call map or flatMap)
+    // that we can then use in the if (filter)
+    for 
+      x <- 0 to 8
+      y <- 0 to 8
+      possibilities = possibilitiesFor((x,y), grid) if possibilities.length == 1
+    yield ((x, y), possibilities.head)
   }
 
 }
