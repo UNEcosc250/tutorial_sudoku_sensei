@@ -72,7 +72,7 @@ object SudokuSensei {
   /**
     * Let's start with a function that, given a Position, will produce all the positions in
     * that row. For example, row((1, 2)) would produce
-    * Seq( (0,2), (1,2), (2,2), (3,2), (4,2), (5,2), (6,2), (7,2), (8,2), (9,2) )
+    * Seq( (0,2), (1,2), (2,2), (3,2), (4,2), (5,2), (6,2), (7,2), (8,2) )
     *
     * Don't forget, Position is just an alias for a tuple (Int, Int)
     */
