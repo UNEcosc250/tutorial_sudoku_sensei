@@ -41,3 +41,5 @@ metals.sbt
 # VSCode
 .vscode
 
+# Scala-cli
+.scala-build/
